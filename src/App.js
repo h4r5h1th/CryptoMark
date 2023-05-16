@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {ThemeProvider} from './context/ThemeContext'
+import Navbar from './components/Navbar';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Help from './pages/Help';
+import About from './pages/About';
+import CoinPage from './pages/CoinPage'
+import Footer from './components/Footer';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/help' element={<Help/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/coin/:coinId' element={<CoinPage/>}>
+          <Route path=':coinId'/>
+        </Route>
+      </Routes>
+      <Footer/>
+    </ThemeProvider>
   );
 }
 
